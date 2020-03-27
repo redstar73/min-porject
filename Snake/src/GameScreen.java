@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Label;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -32,13 +33,19 @@ public class GameScreen extends JPanel implements Runnable, KeyListener {
     private boolean right = true, left = false, up = false, down =false;
    
     private int ticks = 0;
+    private int score=0;
+    private Label sco;
+    
+    
    
     public GameScreen() {
+    	sco=new Label();
+    	sco.setText("score :"+score);
         setFocusable(true);
-       
+      
         addKeyListener(this);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
- 
+        
         r = new Random();
        
         snake = new ArrayList<BodyPart>();
@@ -46,7 +53,9 @@ public class GameScreen extends JPanel implements Runnable, KeyListener {
        
         
     }
- 
+    public Label getScore() {
+    	return sco;
+    }
     public void tick() {
         if (snake.size() == 0) {
             b = new BodyPart(xCoor, yCoor, 10);
@@ -64,6 +73,8 @@ public class GameScreen extends JPanel implements Runnable, KeyListener {
             if(xCoor == apples.get(i).getxCoor() &&
                     yCoor == apples.get(i).getyCoor()) {
                 size++;
+                score++;
+                sco.setText("score :"+score);
                 apples.remove(i);
                 i++;
             }

@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,16 +15,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Main {
+	
 	public static Menu menu;
 	public static GameScreen screen;
+	public static JPanel ps;
 	public static ActionListener a=new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
 			  	
 			  	menu.setVisible(false);
+			  	
 			  	screen.start();
 			  
 			  } 
-			} ;;
+			} ;
 	
 	
 	public Main() { 
@@ -31,14 +35,19 @@ public class Main {
         JFrame frame = new JFrame();
         menu=new Menu();
         screen=new GameScreen();
+        
+        ps=new JPanel(new BorderLayout());
+        ps.add(screen.getScore(),BorderLayout.NORTH);
+        ps.add(screen,BorderLayout.SOUTH);
+        
         screen.setVisible(true);
         frame.setLayout(new FlowLayout());
         frame.add(menu);
-        frame.add(screen);
+        frame.add(ps);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Snake");
         frame.setResizable(false);
-        frame.setSize(500,500);
+        frame.setSize(530,575);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);    
         
