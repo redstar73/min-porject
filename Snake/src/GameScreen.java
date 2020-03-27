@@ -44,7 +44,7 @@ public class GameScreen extends JPanel implements Runnable, KeyListener {
         snake = new ArrayList<BodyPart>();
         apples = new ArrayList<Apple>();
        
-        start();
+        
     }
  
     public void tick() {
@@ -132,6 +132,7 @@ public class GameScreen extends JPanel implements Runnable, KeyListener {
         running = false;
         try {
             thread.join();
+            
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
