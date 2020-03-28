@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Label;
@@ -6,7 +7,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
-
 
 import javax.swing.JPanel;
  
@@ -35,12 +35,14 @@ public class GameScreen extends JPanel implements Runnable, KeyListener {
     private int ticks = 0;
     private int score=0;
     private Label sco;
-    
+    private Dialog d1;
     
    
-    public GameScreen() {
+    public GameScreen(Dialog d) {
+    	d1=d;
     	sco=new Label();
     	sco.setText("score :"+score);
+    	
         setFocusable(true);
       
         addKeyListener(this);
@@ -53,6 +55,23 @@ public class GameScreen extends JPanel implements Runnable, KeyListener {
        
         
     }
+    
+    
+    public void Reset() {
+    	xCoor = 10;
+    	yCoor = 10;
+    	size = 5;
+    	score=0;
+    	sco.setText("score :"+score);
+    	snake = new ArrayList<BodyPart>();
+        apples = new ArrayList<Apple>();
+    	right = true;
+    	left = false;
+    	up = false;
+    	down =false;
+    	
+    }
+    
     public Label getScore() {
     	return sco;
     }
@@ -141,13 +160,19 @@ public class GameScreen extends JPanel implements Runnable, KeyListener {
  
     public void stop() {
         running = false;
+        d1.setVisible(true);
+         
         try {
+        	
             thread.join();
             
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
+       
+        
     }
  
     public void run() {
