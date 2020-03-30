@@ -1,4 +1,6 @@
 import java.awt.BorderLayout;
+import java.awt.Checkbox;
+import java.awt.CheckboxGroup;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -116,9 +118,53 @@ public class Main {
 			JButton Exit=new JButton("Exit");
 			JPanel p1=new JPanel(new GridLayout(8,1));
 			JPanel main=new JPanel(new BorderLayout());
-			JSlider speed=new JSlider();
-			JPanel opt=new JPanel(new GridLayout(2,1));
+			JSlider speed=new JSlider(500000,1000000,750000);
+			JPanel opt=new JPanel(new GridLayout(7,1));
+			CheckboxGroup g=new CheckboxGroup();
+			Checkbox c1=new Checkbox("Green",g,true);
+			Checkbox c2=new Checkbox("Yallow",g,false);
+			Checkbox c3=new Checkbox("Orange",g,false);
+			JPanel colors=new JPanel(new FlowLayout(FlowLayout.CENTER));
+			CheckboxGroup bg=new CheckboxGroup();
+			Checkbox bc1=new Checkbox("Black",bg,true);
+			Checkbox bc2=new Checkbox("White",bg,false);
+			JPanel bcolors=new JPanel(new FlowLayout(FlowLayout.CENTER));
+			JButton save=new JButton("Save");	
+			JButton cancel=new JButton("Cancel");
+			JPanel buttons=new JPanel(new FlowLayout(FlowLayout.CENTER));
+			
+			buttons.add(save);
+			buttons.add(cancel);
+			cancel.addActionListener(new ActionListener() { 
+				public void actionPerformed(ActionEvent e) { 
+				  	p1.setVisible(true);
+				  	opt.setVisible(false);
+				  
+				  } 
+				} );
+			Exit.addActionListener(new ActionListener() { 
+				public void actionPerformed(ActionEvent e) { 
+					System.exit(0);
+				  
+				  } 
+				} );
+			
+			bcolors.add(bc1);
+			bcolors.add(bc2);
+			
+			colors.add(c1);
+			colors.add(c2);
+			colors.add(c3);
+			
+			opt.add(new JLabel("Snake speed :"));
 			opt.add(speed);
+			
+			opt.add(new JLabel("Snake Color :"));
+			opt.add(colors);
+			opt.add(new JLabel("Background Color :"));
+			opt.add(bcolors);
+			opt.add(buttons);
+			
 			setPreferredSize(new Dimension(500, 570));
 			
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -136,12 +182,13 @@ public class Main {
 			
 			
 			this.setLayout(new FlowLayout());
+			p1.add(new JPanel());
 			p1.add(begin);
-			
+			p1.add(new JPanel());
 			p1.add(Option);
-			
+			p1.add(new JPanel());
 			p1.add(LeaderBoard);
-			
+			p1.add(new JPanel());
 			p1.add(Exit);
 			
 			
