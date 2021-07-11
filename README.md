@@ -1,1 +1,1 @@
-# min-porject
+# Snake game
